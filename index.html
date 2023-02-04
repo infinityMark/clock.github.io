@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>时钟</title>
+
+    <style>
+        .clock{
+            position: absolute;
+            width: auto;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%)translateY(-50%);
+            color: #000000;
+            font-size: 190px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            letter-spacing: 7px;
+        }
+
+        #body{
+            background-color: #ffffff;
+        }
+        #dark:hover{
+            background-color: black;
+        }
+        .material-symbols-outlined {
+            float: right;
+            font-size: 100px;
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 48
+        }
+        #light_mode{
+            color: #ffffff;
+            display: none;
+        }
+    </style>
+
+    <script>
+        function showtime(){
+            var date=new Date();
+            var h=date.getHours()
+            var m=date.getMinutes()
+            var s=date.getSeconds()
+            // var seeion="早上"
+            /*
+            var seeion="AM"
+            */
+
+            if(h==0){
+                h=12;
+            }
+            if(h>12){
+                h=h-12
+                // seeion="下午"
+            }
+            h=(h<10)?"0"+h:h
+            m=(m<10)?"0"+m:m
+            s=(s<10)?"0"+s:s
+
+            var time=h+":"+m+":"+s+""
+
+            document.getElementById("myclockdisplay").innerText=time
+
+            document.getElementById("myclockdisplay").textContent=time
+            setTimeout(showtime,1000)
+        }
+    </script>
+</head>
+<body onload="showtime()" id="bodys">
+    <span class="material-symbols-outlined" id="dark_modes">dark_mode</span>
+    <span class="material-symbols-outlined" id="light_mode">light_mode</span>
+    <!-- <button id="dark">暗色</button> -->
+    <div id="myclockdisplay" class="clock"></div>
+
+    <script>
+        let dark_modes=document.getElementById("dark_modes")
+        let light_mode=document.getElementById("light_mode")
+        let body=document.getElementById("bodys")
+        let myclockdisplay=document.getElementById("myclockdisplay")
+
+        let dark="#000000"
+        let light="#ffffff"
+        let time="1s"
+
+        dark_modes.addEventListener("click",function(){
+            light_mode.style.display="inline";
+            dark_modes.style.display="none"
+
+            body.style.transitionDuration=time
+            body.style.backgroundColor=dark
+
+            myclockdisplay.style.transitionDuration=time
+            myclockdisplay.style.color=light
+        })
+
+        light_mode.addEventListener("click",function(){
+            light_mode.style.display="none";
+            dark_modes.style.display="inline"
+
+            body.style.transitionDuration=time
+            body.style.backgroundColor=light
+
+            myclockdisplay.style.transitionDuration=time
+            myclockdisplay.style.color=dark
+        })
+    </script>
+</body>
+</html>
